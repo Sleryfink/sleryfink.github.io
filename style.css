@@ -1,0 +1,79 @@
+
+/* Псевдоэлемент для создания эффекта плавного появления */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;  /* Фон, который исчезнет при загрузке */
+    z-index: 9999;  /* Слой выше всего остального контента */
+    opacity: 1;
+    transition: opacity 1.5s ease;  /* Плавная анимация исчезновения */
+}
+
+/* Когда сайт загружен, псевдоэлемент плавно исчезает */
+body.loaded::before {
+    opacity: 0;
+    pointer-events: none;  /* Отключаем взаимодействие, чтобы не блокировать контент */
+}
+
+/* Центрирование по вертикали и горизонтали */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;   /* Размещаем элементы в колонку */
+    justify-content: center;  /* Вертикальное центрирование */
+    align-items: center;      /* Горизонтальное центрирование */
+    text-align: center;
+    padding: 20px;
+    overflow: hidden;
+    transition: background-color 0.5s, color 0.5s; /* Плавный переход между темами */
+}
+
+body.light-theme {
+    background-color: #f4f4f4;
+    color: #212121;
+}
+
+/* Тёмная тема */
+body.dark-theme {
+    background-color: #212121;
+    color: #f4f4f4;
+}
+
+.typewriter {
+    border-right: 2px solid;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 5em;
+    font-family: "Nunito Sans", sans-serif;
+    cursor: pointer; /* Добавляем указатель, чтобы показать интерактивность */
+    color: inherit;
+}
+
+#type-text {
+    display: inline-block;
+}
+
+/* Отступы между заголовком и текстом */
+h1 {
+    margin-bottom: 20px;  /* Отступ снизу у заголовка */
+    color: #fff;
+}
+
+p {
+    margin: 20px 0;
+}
+
+p a {
+    text-decoration: none;  /* Убираем подчеркивание ссылок */
+    margin: 0 10px;         /* Отступы между иконками */
+    color: inherit;           /* Цвет иконок */
+}
+
+p a:hover {
+    color: #DEB9FE;         /* Цвет при наведении */
+}
