@@ -1,4 +1,4 @@
-const texts = ["Sleryfink, да эт я)", "Мммммм", "тут могла быть ваша реклама)", "Linuk call center", "Genial, miliardar, playboy, filantrop.", "Дмитрий 100 рублей от вас📍", "Sweet user", "I use Fedora btw", "Ya v shoke"];
+const texts = ["Sleryfink, да эт я)", "Мммммм", "тут могла быть ваша реклама)", "Linuk call center", "Genial, ̶m̶i̶l̶i̶a̶r̶d̶a̶r̶, playboy, filantrop.", "Дмитрий 100 рублей от вас📍", "Sweet user", "I use Fedora btw", "Ya v shoke"];
 let currentText = 0;
 let currentChar = -8;
 let isDeleting = false;
@@ -10,6 +10,9 @@ window.addEventListener('load', () => {
     document.body.classList.add('loaded');  // Добавляем класс для активации анимации
 });
 
+function getRandomTextIndex() {
+    return Math.floor(Math.random() * texts.length);  // Возвращаем случайный индекс массива
+}
 
 function type() {
     const currentString = texts[currentText];
@@ -32,7 +35,7 @@ function type() {
         setTimeout(type, pauseBeforeDeleting);  // Задержка перед удалением
     } else if (isDeleting && currentChar === -1) {
         isDeleting = false;  // Начинаем печатать следующий текст
-        currentText = (currentText + 1) % texts.length;  // Переход к следующему тексту
+        currentText = getRandomTextIndex();  // Переход к случайному следующему тексту
         setTimeout(type, 500);  // Пауза перед началом печатания нового текста
     } else {
         setTimeout(type, typingSpeed);  // Продолжаем печатать/удалять
