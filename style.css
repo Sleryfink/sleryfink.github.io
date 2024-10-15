@@ -1,4 +1,3 @@
-
 /* Псевдоэлемент для создания эффекта плавного появления */
 body::before {
     content: "";
@@ -76,4 +75,9 @@ p a {
 
 p a:hover {
     color: #DEB9FE;         /* Цвет при наведении */
+}
+
+/* Новый класс для зачёркивания текста */
+.strikethrough {
+    text-decoration: line-through;
 }
