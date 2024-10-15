@@ -2,6 +2,7 @@ const texts = ["Sleryfink, да эт я)", "Мммммм", "тут могла б
 let currentText = 0;
 let currentChar = -8;
 let isDeleting = false;
+let previousTexts = []; // Массив для хранения последних двух текстов
 
 const typeTextElement = document.getElementById('type-text');
 const bodyElement = document.body; // Получаем доступ к элементу body
@@ -11,7 +12,16 @@ window.addEventListener('load', () => {
 });
 
 function getRandomTextIndex() {
-    return Math.floor(Math.random() * texts.length);  // Возвращаем случайный индекс массива
+    let availableIndexes = texts.map((_, index) => index).filter(index => !previousTexts.includes(index)); // Фильтруем последние два текста
+    let randomIndex = Math.floor(Math.random() * availableIndexes.length);  // Возвращаем случайный индекс из оставшихся
+    return availableIndexes[randomIndex];
+}
+
+function updatePreviousTexts() {
+    previousTexts.push(currentText);
+    if (previousTexts.length > 2) {
+        previousTexts.shift(); // Убираем старые тексты, если их больше двух
+    }
 }
 
 function type() {
@@ -35,7 +45,8 @@ function type() {
         setTimeout(type, pauseBeforeDeleting);  // Задержка перед удалением
     } else if (isDeleting && currentChar === -1) {
         isDeleting = false;  // Начинаем печатать следующий текст
-        currentText = getRandomTextIndex();  // Переход к случайному следующему тексту
+        updatePreviousTexts(); // Обновляем историю текстов
+        currentText = getRandomTextIndex();  // Переход к случайному следующему тексту, который не был показан недавно
         setTimeout(type, 500);  // Пауза перед началом печатания нового текста
     } else {
         setTimeout(type, typingSpeed);  // Продолжаем печатать/удалять
