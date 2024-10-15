@@ -1,4 +1,4 @@
-const texts = ["Sleryfink, да эт я)", "Мммммм", "тут могла быть ваша реклама)", "Genial, ̶m̶i̶l̶i̶a̶r̶d̶a̶r̶, playboy, filantrop.", "Дмитрий 100 рублей от вас📍", "Sweet user", "Ya v shoke"];
+const texts = ["Sleryfink, да эт я)", "Мммммм", "тут могла быть ваша реклама)", "P1034071991 скинь денежку ;)", "Genial, ̶m̶i̶l̶i̶a̶r̶d̶a̶r̶, playboy, filantrop.", "Дмитрий 100 рублей от вас📍", "Sweet user", "1201816800", "Ya v shoke"];
 let currentText = 0;
 let currentChar = -8;
 let isDeleting = false;
