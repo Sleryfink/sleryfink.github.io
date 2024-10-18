@@ -13,7 +13,7 @@ const texts = [
 const trackInfoElement = document.getElementById('track-info');
 const trackTitleElement = document.getElementById('track-title');
 const trackArtistElement = document.getElementById('track-artist');
-
+const YAMSTOKEN = import.meta.env.YAMS_TOKEN;
 let currentText = 0;
 let currentChar = -8;
 let isDeleting = false;
@@ -80,7 +80,7 @@ function toggleTheme() {
 }
 async function fetchTrackInfo() {
     try {
-        const response = await fetch('https://api.mipoh.ru/get_current_track_beta?ya_token=myapi');
+        const response = await fetch(`https://api.mipoh.ru/get_current_track_beta?ya_token=${YAMSTOKEN}`);
         const data = await response.json();
 
         if (data.track) {
