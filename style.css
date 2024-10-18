@@ -52,6 +52,25 @@ body.dark-theme {
     cursor: pointer; /* Добавляем указатель, чтобы показать интерактивность */
     color: inherit;
 }
+.track-info {
+    position: fixed;
+    bottom: 20px; /* Отступ от нижнего края */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный фон */
+    color: #fff; /* Цвет текста */
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-family: "Nunito Sans", sans-serif;
+    z-index: 10000; /* Поверх всего остального */
+    text-align: center;
+}
+
+.track-info span {
+    display: block;
+    margin: 5px 0;
+}
+
 
 #type-text {
     display: inline-block;
