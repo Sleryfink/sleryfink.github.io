@@ -10,10 +10,6 @@ const texts = [
     'Скинь денежку ;)', 
     'Ya v shoke'
 ];
-const trackInfoElement = document.getElementById('track-info');
-const trackTitleElement = document.getElementById('track-title');
-const trackArtistElement = document.getElementById('track-artist');
-const YAMSTOKEN = import.meta.env.YAMS_TOKEN;
 let currentText = 0;
 let currentChar = -8;
 let isDeleting = false;
@@ -78,29 +74,6 @@ function toggleTheme() {
         bodyElement.classList.add('light-theme');
     }
 }
-async function fetchTrackInfo() {
-    try {
-        const response = await fetch(`https://api.mipoh.ru/get_current_track_beta?ya_token=${YAMSTOKEN}`);
-        const data = await response.json();
-
-        if (data.track) {
-            const trackTitle = data.track.title || '---';
-            const trackArtist = data.track.artist || '---';
-
-            trackTitleElement.textContent = `Трек: ${trackTitle}`;
-            trackArtistElement.textContent = `Исполнитель: ${trackArtist}`;
-        }
-    } catch (error) {
-        console.error('Ошибка получения данных о треке:', error);
-        trackTitleElement.textContent = 'Ошибка загрузки трека';
-        trackArtistElement.textContent = '';
-    }
-}
-// Запрашивать данные каждые 60 секунд
-setInterval(fetchTrackInfo, 60000);
-
-// Первоначальная загрузка информации о треке
-fetchTrackInfo();
 // Событие на клик по тексту для смены темы
 typeTextElement.addEventListener('click', toggleTheme);
 
