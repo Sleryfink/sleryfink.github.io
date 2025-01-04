@@ -13,6 +13,7 @@ const texts = [
 let currentText = 0;
 let currentChar = -8;
 let isDeleting = false;
+let recentTexts = [];
 
 const typeTextElement = document.getElementById('type-text');
 const bodyElement = document.body;
@@ -25,41 +26,50 @@ function type() {
     const currentString = texts[currentText];
     let displayedText;
 
-    // Уменьшение или увеличение текста
     if (isDeleting) {
         displayedText = currentString.substring(0, currentChar--);
     } else {
         displayedText = currentString.substring(0, currentChar+++1);
     }
 
-    // Обновляем текст с учетом HTML-разметки
     typeTextElement.innerHTML = displayedText;
 
-    const typingSpeed = isDeleting ? 75 : 150;
+    let typingSpeed = isDeleting
+        ? 50 + (currentString.length - currentChar) * 5
+        : 150;
+
     const pauseBeforeDeleting = 1000;
 
-    // Когда текст полностью напечатан
     if (!isDeleting && currentChar === currentString.length) {
-        isDeleting = true;  // Начать удаление
-        setTimeout(type, pauseBeforeDeleting);  // Задержка перед удалением
+        isDeleting = true;
+        setTimeout(type, pauseBeforeDeleting);
     }
-    // Когда текст полностью удалён
     else if (isDeleting && currentChar === -1) {
-        isDeleting = false;  // Начать печатать новый текст
-        currentText = getRandomTextIndex();  // Выбрать случайный текст
-        currentChar = 0;  // Сбросить счётчик символов
-        setTimeout(type, 500);  // Задержка перед началом печати нового текста
+        isDeleting = false;
+        currentText = getRandomTextIndex();
+        currentChar = 0;
+        setTimeout(type, 500);
     } else {
-        setTimeout(type, typingSpeed);  // Продолжить печатать/удалять
+        setTimeout(type, typingSpeed);
     }
 }
 
-function getRandomTextIndex() {
-    let randomIndex = Math.floor(Math.random() * texts.length);
 
-    // Убедимся, что новый текст не такой же, как предыдущий
-    while (randomIndex === currentText) {
-        randomIndex = Math.floor(Math.random() * texts.length);
+function getRandomTextIndex() {
+    let availableIndices = texts
+        .map((_, index) => index) // Создаем массив всех индексов
+        .filter(index => !recentTexts.includes(index)); // Исключаем последние три индекса
+
+    if (availableIndices.length === 0) {
+        recentTexts = [];
+        availableIndices = texts.map((_, index) => index);
+    }
+
+    const randomIndex = availableIndices[Math.floor(Math.random() * availableIndices.length)];
+
+    recentTexts.push(randomIndex);
+    if (recentTexts.length > 3) {
+        recentTexts.shift();
     }
 
     return randomIndex;
