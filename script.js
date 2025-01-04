@@ -35,7 +35,7 @@ function type() {
     // Обновляем текст с учетом HTML-разметки
     typeTextElement.innerHTML = displayedText;
 
-    const typingSpeed = isDeleting ? 50 : 150;
+    const typingSpeed = isDeleting ? 75 : 150;
     const pauseBeforeDeleting = 1000;
 
     // Когда текст полностью напечатан
