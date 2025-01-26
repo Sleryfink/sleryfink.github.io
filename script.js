@@ -1,6 +1,7 @@
 const texts = [
     'Привет!',
     //'Sleryfink, да это я...',
+    'Sleryfink ✦',
     'Тут могла быть твоя реклама', 
     '1201816800',
     "Sorry, I'm a sociophobe.",
