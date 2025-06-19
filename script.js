@@ -1,16 +1,11 @@
 const texts = [
     'Привет!',
-    //'Sleryfink, да это я...',
     'Sleryfink ✦',
     'Тут могла быть твоя реклама', 
     '1201816800',
-    "Sorry, I'm a sociophobe.",
-    //`Nah I'd Win 🤞`,
-    'Напиши мне...',
-    'Дмитрий 100 рублей от вас📍',
-    'Why...',
-    'Sweet user',
-    'I <3 ...'
+    "WAKE UP",
+    'New era',
+    'SleryShop.t.me'
 ];
 let currentText = 0;
 let currentChar = -8;
