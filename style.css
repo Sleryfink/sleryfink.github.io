@@ -20,16 +20,23 @@ body.loaded::before {
 
 /* Центрирование по вертикали и горизонтали */
 html, body {
-    height: 100%;
+    min-height: 100%;
     margin: 0;
     display: flex;
     flex-direction: column;   /* Размещаем элементы в колонку */
     justify-content: center;  /* Вертикальное центрирование */
     align-items: center;      /* Горизонтальное центрирование */
     text-align: center;
-    padding: 20px;
+    padding: 0;
     overflow: hidden;
     transition: background-color 0.5s, color 0.5s; /* Плавный переход между темами */
+}
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* всё по центру экрана */
+  width: 100vw;
 }
 
 body.light-theme {
@@ -39,13 +46,22 @@ body.light-theme {
 
 /* Тёмная тема */
 body.dark-theme {
-    background-color: #212121;
+    background-color: #000000;
     color: #f4f4f4;
 }
 
-.typewriter {
-    border-right: 2px solid;
-    white-space: nowrap;
+body.light-theme ::selection {
+  background: #000;    /* чёрный фон */
+  color: #fff;         /* белый текст */
+}
+
+body.dark-theme ::selection {
+  background: #fff;    /* белый фон */
+  color: #000;         /* чёрный текст */
+}
+ .typewriter{
+/*     border-right: 2px solid; */
+    white-space: normal;
     overflow: hidden;
     font-size: 5em;
     font-family: "Nunito Sans", sans-serif;
@@ -54,9 +70,29 @@ body.dark-theme {
 }
 
 
-#type-text {
-    display: inline-block;
+#type-text, .cursor {
+  display: inline;
 }
+.typewriter {
+  text-align: center;
+  font-size: 5em;
+  font-family: "Nunito Sans", sans-serif;
+  color: inherit;
+  /* убери border-right! */
+}
+.cursor {
+  width: 2px;
+  height: 1em;
+  background: currentColor;
+  animation: blink 1s steps(1) infinite;
+  /* не нужен vertical-align и margin-left, лучше padding-left */
+  padding-left: 2px;
+}
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
 
 /* Отступы между заголовком и текстом */
 h1 {
@@ -64,21 +100,103 @@ h1 {
     color: #fff;
 }
 
-p {
-    margin: 20px 0;
-}
+ .button-container {
+            display: flex;
+            gap: 5px;
+            position:fixed;
+            bottom:30px;
+            right: 50px;
+            scale: 120%;
+            
 
-p a {
-    text-decoration: none;  /* Убираем подчеркивание ссылок */
-    margin: 0 10px;         /* Отступы между иконками */
-    color: inherit;           /* Цвет иконок */
-}
+        }
 
-p a:hover {
-    color: #DEB9FE;         /* Цвет при наведении */
-}
+        .gray-footer-button {
+           
+            border-radius: 9999px;
+            font-family: sans-serif;
+            font-size: 14px;
+           
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+            text-decoration: none;
+            user-select: none;
+        }
+
+        .gray-footer-button:hover {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+
+        body.dark-theme .gray-footer-button svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+
+        body.light-theme .gray-footer-button svg {
+            fill: black;
+             width: 16px;
+            height: 16px;
+        }
+
+        body.dark-theme .gray-footer-button {
+               background: #0c0c0c;
+            border: 2px solid rgba(41, 40, 40, 0.2);
+             color: white;
+        }
+
+        body.light-theme .gray-footer-button{
+          background:#ececec ;
+           border: 2px solid rgba(146, 146, 146, 0.2);
+           color:black;  
+        }
+
+        .with-text {
+            padding: 6px 14px;
+        }
+
+        .icon-only {
+            width: 42px;
+            height: 42px;
+            padding: 0;
+            border-radius: 50%;
+        }
+
+        .gray-footer-button p {
+            margin: 0;
+        }
 
 /* Новый класс для зачёркивания текста */
 .strikethrough {
     text-decoration: line-through;
+}
+
+@media screen and (max-width: 768px) {
+  .button-container {
+    left: 0;
+    right: 0;
+    bottom: 30px;
+    width: 100vw;
+    justify-content: center;
+    transform: none;
+    position: fixed;
+    z-index: 10000;
+  }
+  .typewriter {
+    font-size: 3em;
+    max-width: 98vw;
+/*     max-height: 15vh; */
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  html, body {
+    min-height: 100dvh;
+    overflow-x: hidden;
+  }
 }
