@@ -59,6 +59,14 @@ body.dark-theme ::selection {
   background: #fff;    /* белый фон */
   color: #000;         /* чёрный текст */
 }
+
+body.light-theme .gray-footer-button:hover {
+    border-color: #000; /* черная обводка на светлой теме */
+}
+
+body.dark-theme .gray-footer-button:hover {
+    border-color: #fff; /* белая обводка на темной теме */
+}
  .typewriter{
 /*     border-right: 2px solid; */
     white-space: normal;
